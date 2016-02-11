@@ -1,12 +1,7 @@
 source 'https://rubygems.org'
 
-ruby "2.1.2"
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>=4.1.6'
 gem 'rsolr', '>=1.0.10'
-
-
 gem 'rest_client'
 
 # Use SCSS for stylesheets
@@ -23,7 +18,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'turbolinks'
 
 gem 'is_it_working'
@@ -34,23 +29,18 @@ group :test do
   gem 'awesome_print'
   gem 'yard'
   gem 'vcr'
-  gem "webmock"
-  gem "rspec-rails"
+  gem 'webmock'
+  gem 'rspec-rails', '~> 3.1'
   gem 'capybara'
   gem 'coveralls'
 end
 
 group :deployment do
-  gem 'capistrano', '~> 3.0'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
-  gem 'lyberteam-capistrano-devel'
-  gem 'capistrano-rvm'
+  gem 'dlss-capistrano'
 end
 
 group :staging, :production, :development do
   gem 'mysql'
-  
 end
 
 group :development, :test do
@@ -64,16 +54,3 @@ end
 
 gem 'squash_ruby', :require => 'squash/ruby'
 gem 'squash_rails', :require => 'squash/rails'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
