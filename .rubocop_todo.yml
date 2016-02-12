@@ -27,13 +27,6 @@ Lint/BlockAlignment:
 Lint/DefEndAlignment:
   Enabled: false
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'app/controllers/about_controller.rb'
-    - 'lib/tasks/ci.rake'
-
 # Offense count: 3
 Lint/HandleExceptions:
   Exclude:
@@ -72,27 +65,6 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Max: 123
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/AndOr:
-  Exclude:
-    - 'lib/fetcher.rb'
-    - 'lib/tasks/ci.rake'
-    - 'lib/tasks/travis.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/BlockComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
-Style/BlockDelimiters:
-  Enabled: false
-
 # Offense count: 43
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -126,12 +98,6 @@ Style/ConstantName:
   Exclude:
     - 'config/application.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/DeprecatedHashMethods:
-  Exclude:
-    - 'lib/fetcher.rb'
-
 # Offense count: 10
 # Configuration parameters: Exclude.
 Style/Documentation:
@@ -146,52 +112,6 @@ Style/Documentation:
     - 'app/helpers/collection_helper.rb'
     - 'app/helpers/tag_helper.rb'
     - 'config/application.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Exclude:
-    - 'config/application.rb'
-    - 'spec/spec_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundAccessModifier:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'config/deploy.rb'
-    - 'db/schema.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundClassBody:
-  Exclude:
-    - 'app/controllers/apos_controller.rb'
-    - 'app/controllers/collections_controller.rb'
-    - 'app/controllers/tags_controller.rb'
-    - 'spec/rails_helper.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundMethodBody:
-  Exclude:
-    - 'app/controllers/apos_controller.rb'
-    - 'app/controllers/collections_controller.rb'
-    - 'lib/fetcher.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
 
 # Offense count: 13
 # Cop supports --auto-correct.
@@ -229,43 +149,6 @@ Style/IfUnlessModifier:
 Style/IndentHash:
   Enabled: false
 
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/IndentationConsistency:
-  Exclude:
-    - 'Gemfile'
-    - 'lib/fetcher.rb'
-    - 'spec/features/apos_spec.rb'
-    - 'spec/features/collections_spec.rb'
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: Width.
-Style/IndentationWidth:
-  Exclude:
-    - 'app/controllers/apos_controller.rb'
-    - 'app/controllers/collections_controller.rb'
-    - 'lib/fetcher.rb'
-    - 'spec/features/apos_spec.rb'
-    - 'spec/features/collections_spec.rb'
-    - 'spec/rails_helper.rb'
-
-# Offense count: 94
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Exclude:
-    - 'app/controllers/apos_controller.rb'
-    - 'app/controllers/tags_controller.rb'
-    - 'config/application.rb'
-    - 'config/routes.rb'
-    - 'lib/fetcher.rb'
-    - 'lib/tasks/ci.rake'
-    - 'spec/features/apos_spec.rb'
-    - 'spec/features/collections_spec.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/spec_helper.rb'
-
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/MethodName:
@@ -273,13 +156,6 @@ Style/MethodName:
 
 # Offense count: 1
 Style/NestedTernaryOperator:
-  Exclude:
-    - 'lib/fetcher.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: IncludeSemanticChanges.
-Style/NonNilCheck:
   Exclude:
     - 'lib/fetcher.rb'
 
@@ -298,16 +174,6 @@ Style/PercentLiteralDelimiters:
     - 'config/deploy/production.rb'
     - 'config/deploy/stage.rb'
 
-# Offense count: 36
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'lib/fetcher.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/spec_helper.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -320,48 +186,6 @@ Style/SignalException:
 Style/SpaceAfterColon:
   Exclude:
     - 'spec/features/fetcher_spec.rb'
-
-# Offense count: 86
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Exclude:
-    - 'app/controllers/about_controller.rb'
-    - 'app/controllers/apos_controller.rb'
-    - 'app/controllers/collections_controller.rb'
-    - 'lib/fetcher.rb'
-    - 'spec/features/apos_spec.rb'
-    - 'spec/features/collections_spec.rb'
-    - 'spec/features/fetcher_spec.rb'
-    - 'spec/features/ping_spec.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/spec_helper.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
-# Offense count: 96
-# Cop supports --auto-correct.
-# Configuration parameters: MultiSpaceAllowedForOperators.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'app/controllers/about_controller.rb'
-    - 'app/controllers/apos_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/collections_controller.rb'
-    - 'app/controllers/tags_controller.rb'
-    - 'config/application.rb'
-    - 'config/routes.rb'
-    - 'lib/fetcher.rb'
-    - 'spec/features/apos_spec.rb'
-    - 'spec/features/collections_spec.rb'
-    - 'spec/features/fetcher_spec.rb'
-    - 'spec/features/ping_spec.rb'
-    - 'spec/features/tags_spec.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/spec_helper.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -388,48 +212,10 @@ Style/SpaceInsideBrackets:
 Style/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-# Offense count: 116
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiteralsInInterpolation:
-  Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/Tab:
-  Exclude:
-    - 'Gemfile'
-
-# Offense count: 15
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Exclude:
-    - 'app/controllers/about_controller.rb'
-    - 'config/application.rb'
-    - 'config/deploy.rb'
-    - 'config/deploy/development.rb'
-    - 'config/deploy/production.rb'
-    - 'config/deploy/stage.rb'
-    - 'config/initializers/about_page.rb'
-    - 'config/initializers/cookies_serializer.rb'
-    - 'lib/tasks/ci.rake'
-    - 'lib/tasks/travis.rake'
-    - 'spec/features/apos_spec.rb'
-    - 'spec/features/collections_spec.rb'
-    - 'spec/features/fetcher_spec.rb'
-    - 'spec/features/tags_spec.rb'
-    - 'spec/rails_helper.rb'
-
-# Offense count: 273
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
   Enabled: false
 
 # Offense count: 4

@@ -42,61 +42,57 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-# The settings below are suggested to provide a good initial experience
-# with RSpec, but feel free to customize to your heart's content.
-=begin
-  # These two settings work together to allow you to limit a spec run
-  # to individual examples or groups you care about by tagging them with
-  # `:focus` metadata. When nothing is tagged with `:focus`, all examples
-  # get run.
-  config.filter_run :focus
-  config.run_all_when_everything_filtered = true
-
-  # Limits the available syntax to the non-monkey patched syntax that is recommended.
-  # For more details, see:
-  #   - http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax
-  #   - http://teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
-  #   - http://myronmars.to/n/dev-blog/2014/05/notable-changes-in-rspec-3#new__config_option_to_disable_rspeccore_monkey_patching
-  config.disable_monkey_patching!
-
-  # Many RSpec users commonly either run the entire suite or an individual
-  # file, and it's useful to allow more verbose output when running an
-  # individual spec file.
-  if config.files_to_run.one?
-    # Use the documentation formatter for detailed output,
-    # unless a formatter has already been configured
-    # (e.g. via a command-line flag).
-    config.default_formatter = 'doc'
-  end
-
-  # Print the 10 slowest examples and example groups at the
-  # end of the spec run, to help surface which specs are running
-  # particularly slow.
-  config.profile_examples = 10
-
-  # Run specs in random order to surface order dependencies. If you find an
-  # order dependency and want to debug it, you can fix the order by providing
-  # the seed, which is printed after each run.
-  #     --seed 1234
-  config.order = :random
-
-  # Seed global randomization in this process using the `--seed` CLI option.
-  # Setting this allows you to use `--seed` to deterministically reproduce
-  # test failures related to randomization by passing the same `--seed` value
-  # as the one that triggered the failure.
-  Kernel.srand config.seed
-=end
+  # The settings below are suggested to provide a good initial experience
+  # with RSpec, but feel free to customize to your heart's content.
+  #   # These two settings work together to allow you to limit a spec run
+  #   # to individual examples or groups you care about by tagging them with
+  #   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
+  #   # get run.
+  #   config.filter_run :focus
+  #   config.run_all_when_everything_filtered = true
+  #
+  #   # Limits the available syntax to the non-monkey patched syntax that is recommended.
+  #   # For more details, see:
+  #   #   - http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax
+  #   #   - http://teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
+  #   #   - http://myronmars.to/n/dev-blog/2014/05/notable-changes-in-rspec-3#new__config_option_to_disable_rspeccore_monkey_patching
+  #   config.disable_monkey_patching!
+  #
+  #   # Many RSpec users commonly either run the entire suite or an individual
+  #   # file, and it's useful to allow more verbose output when running an
+  #   # individual spec file.
+  #   if config.files_to_run.one?
+  #     # Use the documentation formatter for detailed output,
+  #     # unless a formatter has already been configured
+  #     # (e.g. via a command-line flag).
+  #     config.default_formatter = 'doc'
+  #   end
+  #
+  #   # Print the 10 slowest examples and example groups at the
+  #   # end of the spec run, to help surface which specs are running
+  #   # particularly slow.
+  #   config.profile_examples = 10
+  #
+  #   # Run specs in random order to surface order dependencies. If you find an
+  #   # order dependency and want to debug it, you can fix the order by providing
+  #   # the seed, which is printed after each run.
+  #   #     --seed 1234
+  #   config.order = :random
+  #
+  #   # Seed global randomization in this process using the `--seed` CLI option.
+  #   # Setting this allows you to use `--seed` to deterministically reproduce
+  #   # test failures related to randomization by passing the same `--seed` value
+  #   # as the one that triggered the failure.
+  #   Kernel.srand config.seed
 end
-
-
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock
 end
 
-#This only checks to see if the druids you are looking for are present
-#Other druids may be present as well, so I suggest you also test for total number returned
+# This only checks to see if the druids you are looking for are present
+# Other druids may be present as well, so I suggest you also test for total number returned
 def result_should_contain_druids(druids, response)
   response.each do |r|
     expect(druids.include?(r['druid'])).to be true
@@ -110,83 +106,78 @@ def result_should_not_contain_druids(druids, response)
 end
 
 def all_counts_keys
-  #do not include counts_key, it is the parent
-  return [collections_key, items_key, apos_key, total_count_key]
+  # do not include counts_key, it is the parent
+  [collections_key, items_key, apos_key, total_count_key]
 end
 
 def collections_key
-  return 'collections'
+  'collections'
 end
 
 def items_key
-  return 'items'
+  'items'
 end
 
 def apos_key
-  return 'adminpolicies'
+  'adminpolicies'
 end
 
 def counts_key
-  return 'counts'
+  'counts'
 end
 
 def total_count_key
-  return 'total_count'
+  'total_count'
 end
 
-#Automatically gets total counts, don't need to add it
+# Automatically gets total counts, don't need to add it
 def verify_counts_section(response, counts)
-  total_count = 0 
-  nil_keys = all_counts_keys-[total_count_key]
-  counts.each do |key,value|
-    
-    #Make the count is what we expect it to be
+  total_count = 0
+  nil_keys = all_counts_keys - [total_count_key]
+  counts.each do |key, value|
+    # Make the count is what we expect it to be
     expect(response[counts_key][key]).to eq(value)
-    
-    #Go back to the JSON section that lists all the druids and make sure its size equals the value listed in count
+
+    # Go back to the JSON section that lists all the druids and make sure its size equals the value listed in count
     expect(response[key].size).to eq(value)
-    
+
     total_count += value
-    
-    #This key was present, so we don't expect it to be nil
-    nil_keys -= [key]  
-    
+
+    # This key was present, so we don't expect it to be nil
+    nil_keys -= [key]
   end
-  #If the tester didn't specify total count above, check it
+  # If the tester didn't specify total count above, check it
   expect(total_count).to eq(response[counts_key][total_count_key]) if counts[total_count_key = nil]
-  
-  #Make sure the keys we expect to be nil aren't in the counts section
+
+  # Make sure the keys we expect to be nil aren't in the counts section
   nil_keys.each do |key|
     expect(response[counts_key][key]).to be nil
   end
-  
 end
 
 def just_count_param
-  return {"rows"=> 0}
+  {'rows' => 0}
 end
 
 def last_mod_test_date_collections
-  return '2013-12-31T23:59:59Z'
+  '2013-12-31T23:59:59Z'
 end
 
 def first_mod_test_date_collections
-  return '2014-1-1T00:00:00Z'
+  '2014-1-1T00:00:00Z'
 end
 
 def mod_test_date_apos
-  return '2013-03-13T12:13:14Z'
+  '2013-03-13T12:13:14Z'
 end
 
 def first_mod_test_date_apos
-  return '2014-03-13T12:13:14Z'
+  '2014-03-13T12:13:14Z'
 end
-
 
 def find_druid_in_array(array, target)
   array.each do |entry|
     return entry if entry['druid'] = target
   end
-  return nil
+  nil
 end
-  
