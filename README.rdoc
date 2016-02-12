@@ -3,11 +3,6 @@
 
 A web service app that queries the DOR solr service to return info needed for indexing or other purposes.
 
-== Dependencies on non-public code
-
-* fill me in
-
-
 == Setting up your environment
 
   rvm install 2.1.2 # or use your favorite ruby manager
@@ -31,7 +26,6 @@ A web service app that queries the DOR solr service to return info needed for in
   rake dorfetcher:refresh_fixtures
   rake dorfetcher:refresh_fixtures RAILS_ENV=test
 
-
 == Running the application
 
   rake jetty:start
@@ -39,7 +33,7 @@ A web service app that queries the DOR solr service to return info needed for in
   
 == Running tests
 
-===To run the tests against the current VCR Cassettes:
+=== To run the tests against the current VCR Cassettes:
 
 * Setup database.yml if you haven't already
    cp config/database.yml.example config/database.yml
@@ -50,7 +44,7 @@ A web service app that queries the DOR solr service to return info needed for in
 * If you have a dependency related error trying the tests via:
    bundle exec rspec
      
-===To run the tests and generate new VCR Cassettes:
+=== To run the tests and generate new VCR Cassettes:
 
 This can be used to refresh outdated cassettes or record cassettes for new tests.
 
@@ -70,11 +64,11 @@ This can be used to refresh outdated cassettes or record cassettes for new tests
 
 To generate documentation into the "doc" folder:
 
-	yard
+  yard
 
 To keep a local server running with up to date code documentation that you can view in your browser:
 
-	yard server --reload    
+  yard server --reload
 
 == Tunneling into Stanford Solr For Developmental Work 
 
