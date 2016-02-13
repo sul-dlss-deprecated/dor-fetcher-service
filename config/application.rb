@@ -14,15 +14,11 @@ module DorFetcherService
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
-
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Add in files in lib/ such as the fetcher module
+    # Add in files in lib/, such as the fetcher module
     config.autoload_paths << Rails.root.join('lib')
 
     config.version = VERSION # read from VERSION file at base of website
@@ -57,30 +53,26 @@ module DorFetcherService
   end
 end
 
-Conf = DorFetcherService::Application.config
-
-# Convienence constant for SOLR_URL and SOLR
+# Convienence constant for SOLR
 begin
-  Solr_URL = Conf.solr_url
-  Solr = RSolr.connect :url => Solr_URL
+  Solr = RSolr.connect :url => DorFetcherService::Application.config.solr_url
 rescue
   puts 'WARNING: Could not configure solr url'
 end
 
 begin
-  Solr_terms = Conf.solr_terms
+  Solr_terms = DorFetcherService::Application.config.solr_terms
 
   # Convience constants for Solr Fields
-  # solr_field_yaml = DorFetcherService::Application.config.solr_terms
-  ID_Field = Solr_terms['id_field']
-  Type_Field = Solr_terms['fedora_type_field']
-  CatKey_Field = Solr_terms['catkey_field']
-  Title_Field = Solr_terms['title_field']
-  Title_Field_Alt = Solr_terms['title_field_alt']
+  ID_Field           = Solr_terms['id_field']
+  Type_Field         = Solr_terms['fedora_type_field']
+  CatKey_Field       = Solr_terms['catkey_field']
+  Title_Field        = Solr_terms['title_field']
+  Title_Field_Alt    = Solr_terms['title_field_alt']
   Last_Changed_Field = Solr_terms['last_changed']
-  Fedora_Prefix = Solr_terms['fedora_prefix']
-  Druid_Prefix = Solr_terms['druid_prefix']
-  Fedora_Types = {:collection => Solr_terms['collection_type'], :apo => Solr_terms['apo_type'], :item => Solr_terms['item_type'], :set => Solr_terms['set_type']}.freeze
+  Fedora_Prefix      = Solr_terms['fedora_prefix']
+  Druid_Prefix       = Solr_terms['druid_prefix']
+  Fedora_Types     = {:collection => Solr_terms['collection_type'], :apo => Solr_terms['apo_type'], :item => Solr_terms['item_type'], :set => Solr_terms['set_type']}.freeze
   Controller_Types = {:collection => Solr_terms['collection_field'], :apo => Solr_terms['apo_field'], :tag => Solr_terms['tag_field']}.freeze
 rescue
   puts 'WARNING: Could not configure solr terms'

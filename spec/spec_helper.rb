@@ -23,7 +23,10 @@ RSpec.configure do |config|
   end
 end
 
+# To record new cassettes:
+#   remove old ones; update index or configure new source; uncomment default_cassette_options; and run tests
 VCR.configure do |c|
+  # c.default_cassette_options = { :record => :new_episodes }
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock
 end
@@ -74,17 +77,13 @@ def verify_counts_section(response, counts)
   counts.each do |key, value|
     # Make the count is what we expect it to be
     expect(response[counts_key][key]).to eq(value)
-
     # Go back to the JSON section that lists all the druids and make sure its size equals the value listed in count
     expect(response[key].size).to eq(value)
-
     total_count += value
-
-    # This key was present, so we don't expect it to be nil
-    nil_keys -= [key]
+    nil_keys -= [key] # key was present, so we don't expect it to be nil
   end
   # If the tester didn't specify total count above, check it
-  expect(total_count).to eq(response[counts_key][total_count_key]) if counts[total_count_key = nil]
+  expect(total_count).to eq(response[counts_key][total_count_key]) if counts[total_count_key = nil] # @FIXME: WTF assignment??
 
   # Make sure the keys we expect to be nil aren't in the counts section
   nil_keys.each do |key|
@@ -110,11 +109,4 @@ end
 
 def first_mod_test_date_apos
   '2014-03-13T12:13:14Z'
-end
-
-def find_druid_in_array(array, target)
-  array.each do |entry|
-    return entry if entry['druid'] = target
-  end
-  nil
 end

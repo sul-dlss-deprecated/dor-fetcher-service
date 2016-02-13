@@ -18,12 +18,12 @@ describe('Fetcher lib')  do
   end
 
   it 'should return the correct date range query part' do
-    expect(@fetcher.get_date_solr_query(nil)).to eq("AND published_dt:[\"#{@earliest}\" TO \"#{@latest}\"]")
-    expect(@fetcher.get_date_solr_query({})).to eq("AND published_dt:[\"#{@earliest}\" TO \"#{@latest}\"]")
-    expect(@fetcher.get_date_solr_query({first_modified:nil, last_modified:'01/01/2014'})).to eq("AND published_dt:[\"#{@earliest}\" TO \"2014-01-01T00:00:00Z\"]")
-    expect(@fetcher.get_date_solr_query({first_modified:'01/01/2014', last_modified:nil})).to eq("AND published_dt:[\"2014-01-01T00:00:00Z\" TO \"#{@latest}\"]")
+    expect(@fetcher.get_date_solr_query(nil)).to eq("AND published_dttsim:[\"#{@earliest}\" TO \"#{@latest}\"]")
+    expect(@fetcher.get_date_solr_query({})).to eq("AND published_dttsim:[\"#{@earliest}\" TO \"#{@latest}\"]")
+    expect(@fetcher.get_date_solr_query({first_modified:nil, last_modified:'01/01/2014'})).to eq("AND published_dttsim:[\"#{@earliest}\" TO \"2014-01-01T00:00:00Z\"]")
+    expect(@fetcher.get_date_solr_query({first_modified:'01/01/2014', last_modified:nil})).to eq("AND published_dttsim:[\"2014-01-01T00:00:00Z\" TO \"#{@latest}\"]")
     expect(@fetcher.get_date_solr_query({status:'registered', first_modified:'01/01/2014', last_modified:nil})).to eq('')
-    expect(@fetcher.get_date_solr_query({status:'wazzup', first_modified:'01/01/2014', last_modified:nil})).to eq("AND published_dt:[\"2014-01-01T00:00:00Z\" TO \"#{@latest}\"]")
+    expect(@fetcher.get_date_solr_query({status:'wazzup', first_modified:'01/01/2014', last_modified:nil})).to eq("AND published_dttsim:[\"2014-01-01T00:00:00Z\" TO \"#{@latest}\"]")
     expect(@fetcher.get_date_solr_query({status:'registered'})).to eq('')
   end
 
@@ -79,24 +79,23 @@ describe('Fetcher lib')  do
 
   it 'It should test for picking the proper date out of a range' do
     VCR.use_cassette('last_changed_testing') do
-       latest_change = 'latest_change'
-       visit collection_path(@fixture_data.top_level_revs_collection_druid)
-       response = JSON.parse(page.body)
-       collections = response[collections_key]
-       d = find_druid_in_array(collections, @fixture_data.top_level_revs_collection_druid)
-       expect(d[latest_change]).to eq('2014-06-06T05:06:06Z')
-
-       visit collection_path(@fixture_data.top_level_revs_collection_druid, {:last_modified => '2014-06-05T05:06:06Z'})
-       response = JSON.parse(page.body)
-       collections = response[collections_key]
-       d = find_druid_in_array(collections, @fixture_data.top_level_revs_collection_druid)
-       expect(d[latest_change]).to eq('2014-05-05T05:04:13Z')
+      latest_change = 'latest_change'
+      revs_druid = @fixture_data.top_level_revs_collection_druid
+      visit collection_path(revs_druid)
+      response = JSON.parse(page.body)
+      # binding.pry
+      expect(response).to include(collections_key)
+      expect(response[collections_key]).to include a_hash_including('druid' => revs_druid, 'latest_change' => '2014-06-06T05:06:06Z')
+      visit collection_path(revs_druid, {:last_modified => '2014-06-05T05:06:06Z'})
+      response = JSON.parse(page.body)
+      expect(response).to include(collections_key)
+      expect(response[collections_key]).to include a_hash_including('druid' => revs_druid, 'latest_change' => '2014-05-05T05:04:13Z')
      end
   end
 
   it 'should raise an error when selected for an invalid date range' do
     times = {:first => yTenK, :last => yTenK}
     last_changed = ['2014-05-05T05:04:13Z', '2014-04-05T05:04:13Z']
-    expect{@fetcher.determine_latest_date(times, last_changed)}.to raise_error(RuntimeError)
+    expect{ @fetcher.determine_latest_date(times, last_changed) }.to raise_error(RuntimeError)
   end
 end
