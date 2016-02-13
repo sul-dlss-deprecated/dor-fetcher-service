@@ -1,0 +1,29 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8983/solr/dev/select?fl=id,published_dttsim,objectType_ssim,title_tesim,public_dc_title_tesim,catkey_id_ssim&q=(tag_tesim:%22%22)%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=100000000&wt=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Last-Modified:
+      - Sat, 13 Feb 2016 02:02:19 GMT
+      Etag:
+      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {"responseHeader":{"status":0,"QTime":2},"response":{"numFound":19,"start":0,"docs":[{"id":"druid:bb001zc5754","title_tesim":["French Grand Prix and 12 Hour Rheims: 1954"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051728"]},{"id":"druid:bb004bn8654","title_tesim":[" Bryar 250 Trans-American: 1966"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051729"]},{"id":"druid:bb013sq9803","title_tesim":["Swedish Grand Prix: 1976"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051730"]},{"id":"druid:bb014bd3784","title_tesim":["Bridgehampton Double 500: 1964"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051731"]},{"id":"druid:bb023nj3137","title_tesim":["Snetterton Vanwall Trophy: 1958"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051732"]},{"id":"druid:bb027yn4436","title_tesim":["Crystal Palace BARC: 1954"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051733"]},{"id":"druid:bb048rn5648","objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051734"]},{"id":"druid:bb113tm9924","public_dc_title_tesim":["Permatex 300 NASCAR Race: 1968"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051735"]},{"id":"druid:jf275fd6276","title_tesim":["Album A: Photographs of China's natural landscapes, urban scenes, cultural landmarks, social customs, and people."],"objectType_ssim":["item"],"published_dttsim":["2013-11-11T23:34:29Z"],"catkey_id_ssim":["3051735"]},{"id":"druid:nt028fd5773","title_tesim":["The Revs Institute for Automotive Research, Inc."],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"]},{"id":"druid:nz353cp1092","title_tesim":["Album E: Photographs of the Seventh Day Adventist Church missionaries in China"],"objectType_ssim":["item"],"published_dttsim":["2013-11-11T23:34:29Z"],"catkey_id_ssim":["3051736"]},{"id":"druid:qv648vd4392","title_tesim":["The Revs Institute for Automotive Research"],"objectType_ssim":["adminpolicy"],"published_dttsim":["2013-11-11T23:34:29Z"]},{"id":"druid:tc552kq0798","title_tesim":["Album D: Photographs of China's natural landscapes, urban scenes, cultural landmarks, social customs, and people."],"objectType_ssim":["item"],"published_dttsim":["2013-11-11T23:34:29Z"],"catkey_id_ssim":["3051737"]},{"id":"druid:th998nk0722","title_tesim":["Album C: Photographs of the Chinese Revolution of 1911 and the Shanghai Commercial Press"],"objectType_ssim":["item"],"published_dttsim":["2013-11-11T23:34:29Z"],"catkey_id_ssim":["3051738"]},{"id":"druid:vb546ms7107","title_tesim":["Stafford Photos"],"objectType_ssim":["adminpolicy"],"published_dttsim":["2014-09-09T15:40:29Z","2014-08-08T15:20:28Z","2013-03-13T12:13:13Z"]},{"id":"druid:ww689vs6534","title_tesim":["Album B: Photographs of China's natural landscapes, urban scenes, cultural landmarks, social customs, and people."],"objectType_ssim":["item"],"published_dttsim":["2013-11-11T23:34:29Z"],"catkey_id_ssim":["3051739"]},{"id":"druid:wy149zp6932","title_tesim":["The George Phillips Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051740"]},{"id":"druid:yg867hg1375","title_tesim":["Francis E. Stafford photographs, 1909-1933"],"objectType_ssim":["collection"],"published_dttsim":["2013-11-11T23:34:29Z"]},{"id":"druid:yt502zj0924","title_tesim":["TThe Bruce R. Craig Collection of the Revs Institutee"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"]}]}}
+    http_version: 
+  recorded_at: Sat, 13 Feb 2016 02:22:01 GMT
+recorded_with: VCR 3.0.1

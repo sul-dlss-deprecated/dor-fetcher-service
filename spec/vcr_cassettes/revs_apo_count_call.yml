@@ -1,0 +1,29 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8983/solr/dev/select?fl=id,published_dttsim,objectType_ssim,title_tesim,public_dc_title_tesim,catkey_id_ssim&q=(is_governed_by_ssim:%22info:fedora/druid:qv648vd4392%22%20OR%20id:%22druid:qv648vd4392%22)%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=0&wt=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Last-Modified:
+      - Sat, 13 Feb 2016 02:02:19 GMT
+      Etag:
+      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {"responseHeader":{"status":0,"QTime":1},"response":{"numFound":12,"start":0,"docs":[]}}
+    http_version: 
+  recorded_at: Sat, 13 Feb 2016 02:22:00 GMT
+recorded_with: VCR 3.0.1
