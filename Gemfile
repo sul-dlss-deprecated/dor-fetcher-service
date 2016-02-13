@@ -45,7 +45,7 @@ end
 
 group :development, :test do
   gem 'jettywrapper'
-  gem 'better_errors'
+  gem 'pry-byebug'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'launchy'
