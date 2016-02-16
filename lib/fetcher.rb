@@ -175,7 +175,7 @@ module Fetcher
       type   = doc[Type_Field].first || 'unknown_type'
       title1 = doc[Title_Field].first
       title2 = doc[Title_Field_Alt].first
-      title  = title1.nil? ? title2.nil? ? '' : title2[0] : title1[0] # empty string if both titles are nil
+      title  = title1 || title2 || '' # empty string if both titles are nil
       j = {:druid => doc[ID_Field], :latest_change => determine_latest_date(times, doc[Last_Changed_Field]), :title => title}
       j[:catkey] = doc[CatKey_Field].first unless doc[CatKey_Field].nil?
       all_json[type.downcase.pluralize.to_sym] << j # Append this little json stub to its proper parent array
@@ -218,7 +218,7 @@ module Fetcher
   #
   def determine_latest_date(times, last_changed)
     # Sort with latest date first
-    return nil unless last_changed
+    return nil unless last_changed && last_changed.size > 0
     changes_sorted = last_changed.sort.reverse
     changes_sorted.each do |c|
       # all changes_sorted have to be equal or greater than times[:first], otherwise Solr would have had
