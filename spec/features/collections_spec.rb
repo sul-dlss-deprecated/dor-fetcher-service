@@ -51,8 +51,12 @@ describe('Collections Controller')  do
     VCR.use_cassette('status=registered query') do
       visit collections_path(:status => 'registered')
       response = JSON.parse(page.body)
-      verify_counts_section(response, {collections_key => @fixture_data.all_collection_druids.size})
-      expect(response['collections'].include?({'druid' => @fixture_data.not_accessioned_druid.first, 'latest_change' => nil, 'title' => 'Only Registered - Not Accessioned'})).to be true # this is the unaccessioned item
+      verify_counts_section(response, collections_key => @fixture_data.all_collection_druids.size)
+      expect(response['collections']).to include a_hash_including(
+        'druid' => @fixture_data.not_accessioned_druid.first, # this is the unaccessioned item
+        'latest_change' => nil,
+        'title' => 'Only Registered - Not Accessioned'
+      )
     end
   end
 
