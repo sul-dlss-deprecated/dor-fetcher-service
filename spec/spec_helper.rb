@@ -31,18 +31,20 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
-# This only checks to see if the druids you are looking for are present
-# Other druids may be present as well, so I suggest you also test for total number returned
+# Matches if druids and ONLY those druids are in the response
+# @param [Array<String>] druids list of druids expected
+# @param [Object] response query response body
+# @return [void]
 def result_should_contain_druids(druids, response)
-  response.each do |r|
-    expect(druids.include?(r['druid'])).to be true
-  end
+  expect(response).to be_an Array
+  expect(response.size).to eq(druids.size)
+  expect(response.map { |d| d['druid'] }).to contain_exactly(*druids)
 end
 
+# @see #result_should_contain_druids for params and return
 def result_should_not_contain_druids(druids, response)
-  response.each do |r|
-    expect(druids.include?(r['druid'])).to be false
-  end
+  expect(response).to be_an Array
+  druids.each { |d| expect(response).not_to include(a_hash_including 'druid' => d) }
 end
 
 def all_counts_keys
@@ -87,7 +89,7 @@ def verify_counts_section(response, counts)
 
   # Make sure the keys we expect to be nil aren't in the counts section
   nil_keys.each do |key|
-    expect(response[counts_key][key]).to be nil
+    expect(response[counts_key]).not_to include(key)
   end
 end
 
