@@ -33,21 +33,21 @@ end
 namespace :dorfetcher do
   desc 'Copy just shared yml files'
   task :config_yml do
-    cp("#{Rails.root}/config/database.yml.example", "#{Rails.root}/config/database.yml") unless File.exist?("#{Rails.root}/config/database.yml")
-    cp("#{Rails.root}/config/solr.yml.example", "#{Rails.root}/config/solr.yml") unless File.exist?("#{Rails.root}/config/solr.yml")
-    cp("#{Rails.root}/config/secrets.yml.example", "#{Rails.root}/config/secrets.yml") unless File.exist?("#{Rails.root}/config/secrets.yml")
+    %w(database solr secrets).each do |f|
+      next if File.exist? "#{Rails.root}/config/#{f}.yml"
+      cp("#{Rails.root}/config/#{f}.yml.example", "#{Rails.root}/config/#{f}.yml", :verbose => true)
+    end
   end
 
   desc 'Copy all configuration files'
   task :config do
     Rake::Task['jetty:stop'].invoke
     Rake::Task['dorfetcher:config_yml'].invoke
-    system('rm -fr jetty/solr/dev/data/index')
-    system('rm -fr jetty/solr/test/data/index')
-    cp("#{Rails.root}/config/schema.xml", "#{Rails.root}/jetty/solr/dev/conf/schema.xml")
-    cp("#{Rails.root}/config/schema.xml", "#{Rails.root}/jetty/solr/test/conf/schema.xml")
-    cp("#{Rails.root}/config/solrconfig.xml", "#{Rails.root}/jetty/solr/dev/conf/solrconfig.xml")
-    cp("#{Rails.root}/config/solrconfig.xml", "#{Rails.root}/jetty/solr/test/conf/solrconfig.xml")
+    system('rm -fr jetty/solr/dev/data/index jetty/solr/test/data/index')
+    %w(schema solrconfig).each do |f|
+      cp("#{Rails.root}/config/#{f}.xml", "#{Rails.root}/jetty/solr/dev/conf/#{f}.xml", :verbose => true)
+      cp("#{Rails.root}/config/#{f}.xml", "#{Rails.root}/jetty/solr/test/conf/#{f}.xml", :verbose => true)
+    end
   end
 
   desc 'Delete and index all fixtures in solr'
@@ -64,10 +64,7 @@ namespace :dorfetcher do
 
   desc 'Index all fixtures into solr'
   task :index_fixtures do
-    add_docs = []
-    Dir.glob("#{Rails.root}/spec/fixtures/*.xml") do |file|
-      add_docs << File.read(file)
-    end
+    add_docs = Dir.glob("#{Rails.root}/spec/fixtures/*.xml").map { |file| File.read(file) }
     puts "Adding #{add_docs.count} documents to #{DorFetcherService::Application.config.solr_url}"
     RestClient.post "#{DorFetcherService::Application.config.solr_url}/update?commit=true", "<update><add>#{add_docs.join(" ")}</add></update>", :content_type => 'text/xml'
   end

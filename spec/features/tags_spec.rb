@@ -13,10 +13,19 @@ describe('Tags Controller')  do
     end
   end
 
-  it 'should return zero for a tag since this is not implemented yet' do
+  it 'should return values with counts' do
     VCR.use_cassette('tag_foo_call') do
       visit tag_path('foo')
-      expect(page.body).to eq('{"counts":{"total_count":0}}')
+      response = ''
+      expect{ response = JSON.parse(page.body) }.not_to raise_error
+      # binding.pry
+      expect(response).to include('counts')
+      expect(response["counts"]).to match a_hash_including(
+        'collections' => 4,
+        'adminpolicies' => 2,
+        'items' => 13,
+        'total_count' => 19
+      )
     end
   end
 end
