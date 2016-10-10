@@ -65,7 +65,7 @@ module Fetcher
   def find_by_tag(params)
     date_range_q = get_date_solr_query(params)
     solrparams = {
-      :q => "(#{Controller_Types[:tag]}:\"#{params[:tag]}\") #{date_range_q}",
+      :q => "(#{Controller_Types[:tag]}:\"#{params[:id]}\") #{date_range_q}",
       :wt => :json,
       :fl => @@field_return_list.join(',')
       }
@@ -174,8 +174,10 @@ module Fetcher
       @@field_return_list.each { |f| doc[f] ||= [] }
       type   = doc[Type_Field].first || 'unknown_type'
       title1 = doc[Title_Field].first
-      title2 = doc[Title_Field_Alt].first
-      title  = title1 || title2 || '' # empty string if both titles are nil
+      title2 = doc[Title_Field_Alt]
+      title = ""
+      title = title1 unless title1.blank?
+      title = title2 unless title2.blank?
       j = {:druid => doc[ID_Field], :latest_change => determine_latest_date(times, doc[Last_Changed_Field]), :title => title}
       j[:catkey] = doc[CatKey_Field].first unless doc[CatKey_Field].nil?
       all_json[type.downcase.pluralize.to_sym] << j # Append this little json stub to its proper parent array

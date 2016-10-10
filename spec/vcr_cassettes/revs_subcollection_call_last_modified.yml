@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:8983/solr/test/select?fl=id,published_dttsim,objectType_ssim,title_tesim,public_dc_title_tesim,catkey_id_ssim&q=(is_member_of_ssim:%22info:fedora/druid:wy149zp6932%22%20OR%20id:%22druid:wy149zp6932%22)%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=100000000&wt=json
+    uri: http://localhost:8983/solr/test/select?fl=id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim&q=(is_member_of_collection_ssim:%22info:fedora/druid:wy149zp6932%22%20OR%20id:%22druid:wy149zp6932%22)%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=100000000&wt=json
     body:
       encoding: US-ASCII
       string: ''
@@ -13,9 +13,9 @@ http_interactions:
       message: OK
     headers:
       Last-Modified:
-      - Tue, 16 Feb 2016 22:46:40 GMT
+      - Mon, 10 Oct 2016 23:00:51 GMT
       Etag:
-      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      - '"ZDAwMDAwMDAwMDAwMDAwMFNvbHI="'
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -23,7 +23,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: |
-        {"responseHeader":{"status":0,"QTime":2},"response":{"numFound":5,"start":0,"docs":[{"id":"druid:wy149zp6932","title_tesim":["The George Phillips Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051740"]},{"id":"druid:bb001zc5754","title_tesim":["French Grand Prix and 12 Hour Rheims: 1954"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051728"]},{"id":"druid:bb023nj3137","title_tesim":["Snetterton Vanwall Trophy: 1958"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051732"]},{"id":"druid:bb027yn4436","title_tesim":["Crystal Palace BARC: 1954"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051733"]},{"id":"druid:bb048rn5648","objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051734"]}]}}
+        {"responseHeader":{"status":0,"QTime":0},"response":{"numFound":5,"start":0,"docs":[{"id":"druid:wy149zp6932","title_ssim":["The George Phillips Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051740"]},{"id":"druid:bb001zc5754","title_ssim":["French Grand Prix and 12 Hour Rheims: 1954"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051728"]},{"id":"druid:bb023nj3137","title_ssim":["Snetterton Vanwall Trophy: 1958"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051732"]},{"id":"druid:bb027yn4436","title_ssim":["Crystal Palace BARC: 1954"],"objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051733"]},{"id":"druid:bb048rn5648","objectType_ssim":["item"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051734"]}]}}
     http_version: 
-  recorded_at: Tue, 16 Feb 2016 22:48:34 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 10 Oct 2016 23:01:07 GMT
+recorded_with: VCR 3.0.3
