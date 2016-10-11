@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '>=4.1.6'
 gem 'rsolr', '>=1.0.10'
-gem 'rest_client'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -35,8 +34,13 @@ group :test do
   gem 'coveralls'
 end
 
+# gems necessary for capistrano deployment
 group :deployment do
+  gem 'capistrano', '~> 3.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'dlss-capistrano'
+  gem 'capistrano-rvm'
 end
 
 group :staging, :production, :development do
@@ -50,6 +54,7 @@ group :development, :test do
   gem 'meta_request'
   gem 'launchy'
   gem 'thin'
+  gem 'rest-client'
 end
 
 gem 'squash_ruby', :require => 'squash/ruby'

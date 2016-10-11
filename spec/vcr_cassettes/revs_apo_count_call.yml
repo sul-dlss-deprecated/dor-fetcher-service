@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:8983/solr/test/select?fl=id,published_dttsim,objectType_ssim,title_tesim,public_dc_title_tesim,catkey_id_ssim&q=(is_governed_by_ssim:%22info:fedora/druid:qv648vd4392%22%20OR%20id:%22druid:qv648vd4392%22)%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=0&wt=json
+    uri: http://localhost:8983/solr/test/select?fl=id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim&q=(is_governed_by_ssim:%22info:fedora/druid:qv648vd4392%22%20OR%20id:%22druid:qv648vd4392%22)%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=0&wt=json
     body:
       encoding: US-ASCII
       string: ''
@@ -13,9 +13,9 @@ http_interactions:
       message: OK
     headers:
       Last-Modified:
-      - Tue, 16 Feb 2016 22:46:40 GMT
+      - Mon, 10 Oct 2016 23:00:51 GMT
       Etag:
-      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      - '"ZDAwMDAwMDAwMDAwMDAwMFNvbHI="'
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -23,7 +23,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: |
-        {"responseHeader":{"status":0,"QTime":2},"response":{"numFound":12,"start":0,"docs":[]}}
+        {"responseHeader":{"status":0,"QTime":1},"response":{"numFound":12,"start":0,"docs":[]}}
     http_version: 
-  recorded_at: Tue, 16 Feb 2016 22:48:34 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 10 Oct 2016 23:01:06 GMT
+recorded_with: VCR 3.0.3

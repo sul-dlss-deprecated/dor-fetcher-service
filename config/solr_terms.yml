@@ -8,12 +8,12 @@ defaults: &defaults
   fedora_prefix:   "info:fedora/"
   id_field:          "id"
   apo_field:         "is_governed_by_ssim"
-  collection_field:  "is_member_of_ssim"
-  tag_field:         "tag_tesim"
+  collection_field:  "is_member_of_collection_ssim"
+  tag_field:         "tag_ssim"
   fedora_type_field: "objectType_ssim"
   last_changed:      "published_dttsim"
-  title_field:       "title_tesim"
-  title_field_alt:   "public_dc_title_tesim"
+  title_field:       "title_ssim"
+  title_field_alt:   "dc_title_ssi"
   catkey_field:      "catkey_id_ssim"
 
 development:

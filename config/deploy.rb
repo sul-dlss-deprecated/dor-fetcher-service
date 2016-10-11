@@ -1,17 +1,12 @@
-# config valid only for Capistrano 3.1
-lock '3.2.1'
-
 set :application, 'dor-fetcher-service'
 set :repo_url, 'https://github.com/sul-dlss/dor-fetcher-service.git'
-
-# Prompt for the correct username
-set :user, ask('User', 'enter in the app username')
+set :user, "lyberadmin"
+set :home_directory, "/opt/app/#{fetch(:user)}"
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :home_directory, "/opt/app/#{fetch(:user)}"
 set :deploy_to, "#{fetch(:home_directory)}/#{fetch(:application)}"
 
 # Default value for :scm is :git
