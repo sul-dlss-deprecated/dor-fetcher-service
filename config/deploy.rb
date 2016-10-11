@@ -22,7 +22,7 @@ set :deploy_to, "#{fetch(:home_directory)}/#{fetch(:application)}"
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/solr.yml config/secrets.yml}
+set :linked_files, %w{config/database.yml config/honeybadger.yml config/solr.yml config/secrets.yml}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -32,8 +32,6 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
-
-before 'deploy:compile_assets', 'squash:write_revision'
 
 namespace :deploy do
   desc 'Restart application'
