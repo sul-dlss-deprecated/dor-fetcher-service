@@ -3,8 +3,6 @@ require 'json'
 
 class ApplicationController < ActionController::Base
   include Fetcher
-  include Squash::Ruby::ControllerMethods
-  enable_squash_client
 
   before_filter :clean_date_params
 

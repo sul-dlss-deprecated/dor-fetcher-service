@@ -57,5 +57,4 @@ group :development, :test do
   gem 'thin'
 end
 
-gem 'squash_ruby', :require => 'squash/ruby'
-gem 'squash_rails', :require => 'squash/rails'
+gem 'honeybadger', '~> 2.0'
