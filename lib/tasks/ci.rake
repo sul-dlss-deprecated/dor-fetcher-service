@@ -1,5 +1,7 @@
 require 'jettywrapper' unless Rails.env.production? || Rails.env.development?
-require 'rest_client'
+if Rails.env.test? || Rails.env.development?
+  require 'rest_client'
+end
 
 desc 'Run continuous integration suite (assuming jetty is not yet started)'
 task :ci do

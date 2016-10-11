@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '>=4.1.6'
 gem 'rsolr', '>=1.0.10'
+gem 'rest-client'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -54,7 +55,6 @@ group :development, :test do
   gem 'meta_request'
   gem 'launchy'
   gem 'thin'
-  gem 'rest-client'
 end
 
 gem 'squash_ruby', :require => 'squash/ruby'
