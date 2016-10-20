@@ -4,7 +4,7 @@ require 'json'
 class ApplicationController < ActionController::Base
   include Fetcher
 
-  before_filter :clean_date_params
+  before_action :clean_date_params
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

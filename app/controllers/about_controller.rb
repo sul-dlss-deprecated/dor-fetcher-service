@@ -1,6 +1,6 @@
 class AboutController < ApplicationController
   def index
-    render :text => 'ok', :status => 200
+    render :plain => 'ok', :status => 200
   end
 
   def version
