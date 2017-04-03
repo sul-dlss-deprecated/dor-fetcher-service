@@ -2,8 +2,7 @@ sudo: false
 language: ruby
 script: bundle exec rake travis_spec
 rvm:
-  - 2.1.2 # deployed
-  - 2.3.1
+  - 2.3.4
 notifications:
   email:
     - pmangiafico@stanford.edu
