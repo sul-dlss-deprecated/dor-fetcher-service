@@ -44,8 +44,8 @@ group :deployment do
   gem 'capistrano-rvm'
 end
 
-group :staging, :production, :development do
-  gem 'mysql'
+group :production do
+  gem 'mysql2'
 end
 
 group :development, :test do
