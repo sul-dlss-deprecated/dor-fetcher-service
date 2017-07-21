@@ -15,6 +15,7 @@ describe('Collections Controller')  do
        result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.accessioned_collection_druids, response[collections_key])
        expect(response[items_key]).to be_nil # Ensure No Items Were Returned
        expect(response[apos_key]).to be_nil  # Ensure No APOS Were Returned
+       expect(response[workflows_key]).to be_nil # Ensure No Workflows Were Returned
        verify_counts_section(response, collections_key => @fixture_data.accessioned_collection_druids.size)
      end
   end
@@ -29,6 +30,7 @@ describe('Collections Controller')  do
       result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.stafford_collections_druids, response[collections_key])
       expect(response[items_key]).to be_nil # Ensure No Items Were Returned
       expect(response[apos_key]).to be_nil  # Ensure No APOS Were Returned
+      expect(response[workflows_key]).to be_nil # Ensure No Workflows Were Returned
       verify_counts_section(response, collections_key => @fixture_data.stafford_collections_druids.size)
     end
   end
@@ -43,6 +45,7 @@ describe('Collections Controller')  do
       result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.revs_collections_druids, response[collections_key])
       expect(response[items_key]).to be_nil # Ensure No Items Were Returned
       expect(response[apos_key]).to be_nil  # Ensure No APOS Were Returned
+      expect(response[workflows_key]).to be_nil # Ensure No Workflows Were Returned
       verify_counts_section(response, collections_key => @fixture_data.revs_collections_druids.size)
     end
   end
