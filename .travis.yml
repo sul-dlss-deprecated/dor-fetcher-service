@@ -7,3 +7,4 @@ notifications:
   email:
     - pmangiafico@stanford.edu
   on_failure: change # default: always
+cache: bundler
