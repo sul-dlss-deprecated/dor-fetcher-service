@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:8983/solr/test/select?fl=id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim&q=objectType_ssim:%22adminpolicy%22%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=100000000&wt=json
+    uri: http://localhost:8983/solr/dorfetcher-test/select?fl=id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim&q=objectType_ssim:%22adminpolicy%22%20AND%20published_dttsim:%5B%221970-01-01T00:00:00Z%22%20TO%20%229999-12-31T23:59:59Z%22%5D&rows=100000000&wt=json
     body:
       encoding: US-ASCII
       string: ''
@@ -13,17 +13,21 @@ http_interactions:
       message: OK
     headers:
       Last-Modified:
-      - Mon, 10 Oct 2016 23:00:51 GMT
+      - Mon, 20 Nov 2017 21:51:51 GMT
       Etag:
-      - '"ZDAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      - '"NjAwMDAwMDAwMDAwMDAwMFNvbHI="'
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '892'
     body:
       encoding: UTF-8
-      string: |
-        {"responseHeader":{"status":0,"QTime":0},"response":{"numFound":2,"start":0,"docs":[{"id":"druid:qv648vd4392","title_ssim":["The Revs Institute for Automotive Research"],"objectType_ssim":["adminpolicy"],"published_dttsim":["2013-11-11T23:34:29Z"]},{"id":"druid:vb546ms7107","title_ssim":["Stafford Photos"],"objectType_ssim":["adminpolicy"],"published_dttsim":["2014-09-09T15:40:29Z","2014-08-08T15:20:28Z","2013-03-13T12:13:13Z"]}]}}
+      string: '{"responseHeader":{"status":0,"QTime":91,"params":{"q":"objectType_ssim:\"adminpolicy\"
+        AND published_dttsim:[\"1970-01-01T00:00:00Z\" TO \"9999-12-31T23:59:59Z\"]","fl":"id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim","rows":"100000000","wt":"json"}},"response":{"numFound":2,"start":0,"docs":[{"id":"druid:qv648vd4392","title_ssim":["The
+        Revs Institute for Automotive Research"],"objectType_ssim":["adminpolicy"],"published_dttsim":["2013-11-11T23:34:29Z"]},{"id":"druid:vb546ms7107","title_ssim":["Stafford
+        Photos"],"objectType_ssim":["adminpolicy"],"published_dttsim":["2014-09-09T15:40:29Z","2014-08-08T15:20:28Z","2013-03-13T12:13:13Z"]}]},"facet_counts":{"facet_queries":{},"facet_fields":{"active_fedora_model_ssi":[],"object_type_si":[]},"facet_ranges":{},"facet_intervals":{},"facet_heatmaps":{}},"spellcheck":{"suggestions":[],"correctlySpelled":true}}
+
+'
     http_version: 
-  recorded_at: Mon, 10 Oct 2016 23:01:06 GMT
+  recorded_at: Mon, 20 Nov 2017 21:52:07 GMT
 recorded_with: VCR 3.0.3

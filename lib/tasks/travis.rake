@@ -1,4 +1,4 @@
-require 'jettywrapper' unless Rails.env.production? || Rails.env.development?
+require 'solr_wrapper' unless Rails.env.production? || Rails.env.development?
 require 'rest_client'
 
 desc 'Set up default .yml config files for Travis and run the tests.'

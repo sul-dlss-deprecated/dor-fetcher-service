@@ -1,19 +1,9 @@
-# = jetty_path key
-# each environment can have a jetty_path with absolute or relative
-# (to app root) path to a jetty/solr install.
-#
-# jetty_path is used by:
-# - solr:marc:index
-# - other rake tasks that start up solr automatically for testing
-#
-# In general you do NOT need to deploy solr in Jetty, you can deploy it however you want.
-
+version: 6.6.0
 development: &dev
-  jetty_path: './jetty'
-  # url: https://sul-solr-tester.stanford.edu/argo_stage
+  # url: https://sul-solr.stanford.edu/solr/argo_stage
   url: http://localhost:8983/solr/dev
 test: &test
-  url: http://localhost:8983/solr/test
+  url: http://localhost:8983/solr/dorfetcher-test
 staging:
   <<: *dev
 production: &prod

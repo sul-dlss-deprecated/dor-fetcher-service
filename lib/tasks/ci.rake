@@ -1,25 +1,28 @@
-require 'jettywrapper' unless Rails.env.production? || Rails.env.development?
+require 'solr_wrapper'
 if Rails.env.test? || Rails.env.development?
   require 'rest_client'
 end
 
-desc 'Run continuous integration suite (assuming jetty is not yet started)'
+desc 'Run continuous integration suite (assuming solr_wrapper is not yet started)'
 task :ci do
   unless Rails.env.test?
     system('bundle exec rake ci RAILS_ENV=test')
   else
     system('bundle exec rake db:migrate RAILS_ENV=test')
-    Jettywrapper.wrap(Jettywrapper.load_config) do
-      Rake::Task['dorfetcher:refresh_fixtures'].invoke
-      Rake::Task['db:migrate'].invoke
-      Rake::Task['db:fixtures:load'].invoke
-      Rake::Task['db:seed'].invoke
-      system('bundle exec rspec spec --color')
+    SolrWrapper.wrap do |solr|
+      solr.with_collection(name: 'dorfetcher-test',
+                           dir: File.join(File.expand_path("../..", File.dirname(__FILE__)), 'config', "solr", "conf")) do
+        Rake::Task['dorfetcher:refresh_fixtures'].invoke
+        Rake::Task['db:migrate'].invoke
+        Rake::Task['db:fixtures:load'].invoke
+        Rake::Task['db:seed'].invoke
+        system('bundle exec rspec spec --color')
+      end
     end
   end
 end
 
-desc 'Assuming jetty is already running - then migrate, reload all fixtures and run rspec'
+desc 'Assuming Solr is already running - then migrate, reload all fixtures and run rspec'
 task :local_ci do
   unless Rails.env.test?
     system('bundle exec rake local_ci RAILS_ENV=test')
@@ -38,17 +41,6 @@ namespace :dorfetcher do
     %w(database solr secrets).each do |f|
       next if File.exist? "#{Rails.root}/config/#{f}.yml"
       cp("#{Rails.root}/config/#{f}.yml.example", "#{Rails.root}/config/#{f}.yml", :verbose => true)
-    end
-  end
-
-  desc 'Copy all configuration files'
-  task :config do
-    Rake::Task['jetty:stop'].invoke
-    Rake::Task['dorfetcher:config_yml'].invoke
-    system('rm -fr jetty/solr/dev/data/index jetty/solr/test/data/index')
-    %w(schema solrconfig).each do |f|
-      cp("#{Rails.root}/config/#{f}.xml", "#{Rails.root}/jetty/solr/dev/conf/#{f}.xml", :verbose => true)
-      cp("#{Rails.root}/config/#{f}.xml", "#{Rails.root}/jetty/solr/test/conf/#{f}.xml", :verbose => true)
     end
   end
 

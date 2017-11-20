@@ -1,0 +1,4 @@
+version: 6.6.0
+collection:
+  dir: config/solr/conf/
+  name: dorfetcher-test

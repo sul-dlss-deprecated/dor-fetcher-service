@@ -49,7 +49,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'jettywrapper'
+  gem 'solr_wrapper', '~> 1.0'
   gem 'pry-byebug'
   gem 'binding_of_caller'
   gem 'meta_request'

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:8983/solr/test/select?fl=id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim&q=objectType_ssim:%22collection%22%20AND%20published_dttsim:%5B%222014-01-01T00:00:00Z%22%20TO%20%222014-05-06T00:00:00Z%22%5D&rows=100000000&wt=json
+    uri: http://localhost:8983/solr/dorfetcher-test/select?fl=id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim&q=objectType_ssim:%22collection%22%20AND%20published_dttsim:%5B%222014-01-01T00:00:00Z%22%20TO%20%222014-05-06T00:00:00Z%22%5D&rows=100000000&wt=json
     body:
       encoding: US-ASCII
       string: ''
@@ -13,17 +13,22 @@ http_interactions:
       message: OK
     headers:
       Last-Modified:
-      - Mon, 10 Oct 2016 23:00:51 GMT
+      - Mon, 20 Nov 2017 21:51:51 GMT
       Etag:
-      - '"ZDAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      - '"NjAwMDAwMDAwMDAwMDAwMFNvbHI="'
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '1225'
     body:
       encoding: UTF-8
-      string: |
-        {"responseHeader":{"status":0,"QTime":0},"response":{"numFound":3,"start":0,"docs":[{"id":"druid:nt028fd5773","title_ssim":["The Revs Institute for Automotive Research, Inc."],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"]},{"id":"druid:wy149zp6932","title_ssim":["The George Phillips Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051740"]},{"id":"druid:yt502zj0924","title_ssim":["The Bruce R. Craig Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"]}]}}
+      string: '{"responseHeader":{"status":0,"QTime":4,"params":{"q":"objectType_ssim:\"collection\"
+        AND published_dttsim:[\"2014-01-01T00:00:00Z\" TO \"2014-05-06T00:00:00Z\"]","fl":"id,published_dttsim,objectType_ssim,title_ssim,dc_title_ssi,catkey_id_ssim","rows":"100000000","wt":"json"}},"response":{"numFound":3,"start":0,"docs":[{"id":"druid:nt028fd5773","title_ssim":["The
+        Revs Institute for Automotive Research, Inc."],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"]},{"id":"druid:wy149zp6932","title_ssim":["The
+        George Phillips Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"],"catkey_id_ssim":["3051740"]},{"id":"druid:yt502zj0924","title_ssim":["The
+        Bruce R. Craig Collection of the Revs Institute"],"objectType_ssim":["collection"],"published_dttsim":["2014-05-05T05:04:13Z","2014-06-06T05:04:13Z","2014-06-06T05:06:06Z"]}]},"facet_counts":{"facet_queries":{},"facet_fields":{"active_fedora_model_ssi":[],"object_type_si":[]},"facet_ranges":{},"facet_intervals":{},"facet_heatmaps":{}},"spellcheck":{"suggestions":[],"correctlySpelled":true}}
+
+'
     http_version: 
-  recorded_at: Mon, 10 Oct 2016 23:01:07 GMT
+  recorded_at: Mon, 20 Nov 2017 21:52:08 GMT
 recorded_with: VCR 3.0.3
