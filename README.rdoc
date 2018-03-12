@@ -1,24 +1,26 @@
-{<img src="https://travis-ci.org/sul-dlss/dor-fetcher-service.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/sul-dlss/dor-fetcher-service]{<img src="https://coveralls.io/repos/sul-dlss/dor-fetcher-service/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/sul-dlss/dor-fetcher-service]
+{<img src="https://travis-ci.org/sul-dlss/dor-fetcher-service.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/sul-dlss/dor-fetcher-service]
+{<img src="https://coveralls.io/repos/github/sul-dlss/dor-fetcher-service/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/sul-dlss/dor-fetcher-service?branch=master]
+{<img src="https://gemnasium.com/badges/github.com/sul-dlss/dor-fetcher-service.svg" alt="Dependency Status" />}[https://gemnasium.com/github.com/sul-dlss/dor-fetcher-service]
 = dor-fetcher-service
 
 A web service app that queries the DOR solr service to return info needed for indexing or other purposes.
 
 == Setting up your environment
 
-  rvm install 2.1.2 # or use your favorite ruby manager
-  
+  rvm install 2.3.4 # or use your favorite ruby manager
+
   git clone https://github.com/sul-dlss/dor-fetcher-service.git
-  
+
   cd dor-fetcher-service
-  
-  rvm use 2.1.2 # or switch as needed
+
+  rvm use 2.3.4 # or switch as needed
 
   bundle install
   rake dorfetcher:config
 
   # Edit config/*.yml files, adding passwords, etc.
 
-  rake jetty:start
+  bundle exec solr_wrapper  # run in background, or leave it in its own window
 
   rake db:migrate
   rake db:migrate RAILS_ENV=test
@@ -28,9 +30,9 @@ A web service app that queries the DOR solr service to return info needed for in
 
 == Running the application
 
-  rake jetty:start
+  bundle exec solr_wrapper
   rails server
-  
+
 == Running tests
 
 === To run the tests against the current VCR Cassettes:
@@ -43,23 +45,22 @@ A web service app that queries the DOR solr service to return info needed for in
    rspec
 * If you have a dependency related error trying the tests via:
    bundle exec rspec
-     
+
 === To run the tests and generate new VCR Cassettes:
 
 This can be used to refresh outdated cassettes or record cassettes for new tests.
 
-* If you are going to use jetty, start it and refresh the fixtures:
-   rake jetty:start
+* If you are going to use Solr, start it and refresh the fixtures:
+   bundle exec solr_wrapper
    rake dorfetcher:refresh_fixtures RAILS_ENV=test
-* If you are not using jetty, confirm you can connect to whatever you are recording from.
+* If you are not using solr_wrapper, confirm you can connect to whichever Solr you are recording from.
 * If you need to replace cassettes, delete any current cassettes by remaining or removing the directory spec/vcr_cassettes.  If you are just adding cassettes this is not needed.
 * Run the tests via:
    bundle exec rspec
-* To confirm the cassettes recorded stop jetty via:
-   rake jetty:stop
-* If you are using something other than jetty, disable your connection (or turn your internet adapter off entirely)
-* Run the tests again, all should pass.  
- 
+* To confirm the cassettes recorded stop Solr (ctrl-C in solr_wrapper process or kill it with PID)
+* If you are using something other than solr_wrapper, disable your connection (or turn your internet adapter off entirely)
+* Run the tests again, all should pass.
+
 == Generate documentation
 
 To generate documentation into the "doc" folder:
@@ -69,4 +70,3 @@ To generate documentation into the "doc" folder:
 To keep a local server running with up to date code documentation that you can view in your browser:
 
   yard server --reload
-
