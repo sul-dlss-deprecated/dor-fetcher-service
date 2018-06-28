@@ -1,4 +1,3 @@
-require 'solr_wrapper'
 if Rails.env.test? || Rails.env.development?
   require 'rest_client'
 end
@@ -9,6 +8,7 @@ task :ci do
     system('bundle exec rake ci RAILS_ENV=test')
   else
     system('bundle exec rake db:migrate RAILS_ENV=test')
+    require 'solr_wrapper'
     SolrWrapper.wrap do |solr|
       solr.with_collection(name: 'dorfetcher-test',
                            dir: File.join(File.expand_path("../..", File.dirname(__FILE__)), 'config', "solr", "conf")) do
