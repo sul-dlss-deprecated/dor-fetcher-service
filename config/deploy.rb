@@ -31,6 +31,10 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+# honeybadger_env otherwise defaults to rails_env
+# we want prod rather than production
+set :honeybadger_env, fetch(:stage)
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
