@@ -3,6 +3,7 @@ language: ruby
 script: bundle exec rake travis_spec
 rvm:
   - 2.3.4
+  - 2.5.3
 notifications:
   email:
     - pmangiafico@stanford.edu
