@@ -80,6 +80,9 @@ class FixtureData
 
   @@all_collection_druids = @@accessioned_collection_druids + @@not_accessioned_druid
 
+  # Workflows
+  @@workflow_druids = ['druid:oo000oo0001','druid:oo000oo0002']
+
   def accessioned_druids
     @@apo_druids + @@accessioned_collection_druids + @@items_druids
   end
@@ -118,6 +121,10 @@ class FixtureData
 
   def all_apo_druids
     @@apo_druids
+  end
+
+  def workflow_druids
+    @@workflow_druids
   end
 
   def revs_apo_druid

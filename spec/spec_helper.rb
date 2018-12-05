@@ -65,6 +65,10 @@ def items_key
   'items'
 end
 
+def workflows_key
+  'workflows'
+end
+
 def apos_key
   'adminpolicies'
 end

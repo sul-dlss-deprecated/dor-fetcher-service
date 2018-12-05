@@ -10,21 +10,12 @@ describe('APOS Controller')  do
     VCR.use_cassette('all_apos_index_call') do
        visit apos_path
        response = JSON.parse(page.body)
-
-       # Ensure All APO Druids Are Present
-       result_should_contain_druids(@fixture_data.all_apo_druids, response[apos_key])
-
-       # Ensure No Other Druids Are Present
-       result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.all_apo_druids, response[apos_key])
-
-       # Ensure No Items Were Returned
-       expect(response[items_key]).to be nil
-
-       # Ensure No Collections Were Returned
-       expect(response[collections_key]).to be nil
-
-       # Verify the Counts
-       verify_counts_section(response, {apos_key => @fixture_data.all_apo_druids.size})
+       result_should_contain_druids(@fixture_data.all_apo_druids, response[apos_key]) # Ensure All APO Druids Are Present
+       result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.all_apo_druids, response[apos_key]) # Ensure No Other Druids Are Present
+       expect(response[items_key]).to be_nil # Ensure No Items Were Returned
+       expect(response[collections_key]).to be_nil # Ensure No Collections Were Returned
+       expect(response[workflows_key]).to be_nil # Ensure No Workflows Were Returned
+       verify_counts_section(response, {apos_key => @fixture_data.all_apo_druids.size}) # Verify the Counts
      end
   end
 
@@ -34,20 +25,12 @@ describe('APOS Controller')  do
       target_url = apos_path(solrparams)
       visit target_url
       response = JSON.parse(page.body)
-      # Ensure the Stafford Apo Druid is Present
-      result_should_contain_druids([@fixture_data.stafford_apo_druid], response[apos_key])
-
-      # Ensure No Other Apos Druids Are Present
-      result_should_not_contain_druids(@fixture_data.accessioned_druids - [@fixture_data.stafford_apo_druid], response[apos_key])
-
-      # Ensure No Items Were Returned
-      expect(response[items_key]).to be nil
-
-      # Ensure No Collections Were Returned
-      expect(response[collections_key]).to be nil
-
-      # Verify the Counts
-      verify_counts_section(response, {apos_key => 1})
+      result_should_contain_druids([@fixture_data.stafford_apo_druid], response[apos_key]) # Ensure the Stafford Apo Druid is Present
+      result_should_not_contain_druids(@fixture_data.accessioned_druids - [@fixture_data.stafford_apo_druid], response[apos_key]) # Ensure No Other Apos Druids Are Present
+      expect(response[items_key]).to be_nil # Ensure No Items Were Returned
+      expect(response[collections_key]).to be_nil # Ensure No Collections Were Returned
+      expect(response[workflows_key]).to be_nil # Ensure No Workflows Were Returned       
+      verify_counts_section(response, {apos_key => 1}) # Verify the Counts
     end
   end
 
@@ -56,21 +39,12 @@ describe('APOS Controller')  do
       target_url = apos_path(:first_modified => mod_test_date_apos)
       visit target_url
       response = JSON.parse(page.body)
-
-      # Ensure the all Apo Druids are Present
-      result_should_contain_druids(@fixture_data.all_apo_druids, response[apos_key])
-
-      # Ensure No Other Druids Are Present
-      result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.all_apo_druids, response[apos_key])
-
-      # Ensure No Items Were Returned
-      expect(response[items_key]).to be nil
-
-      # Ensure No Collections Were Returned
-      expect(response[collections_key]).to be nil
-
-      # Verify the Counts
-      verify_counts_section(response, {apos_key => @fixture_data.all_apo_druids.size})
+      result_should_contain_druids(@fixture_data.all_apo_druids, response[apos_key]) # Ensure the all Apo Druids are Present
+      result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.all_apo_druids, response[apos_key]) # Ensure No Other Druids Are Present
+      expect(response[items_key]).to be_nil # Ensure No Items Were Returned
+      expect(response[collections_key]).to be_nil # Ensure No Collections Were Returned
+      expect(response[workflows_key]).to be_nil # Ensure No Workflows Were Returned       
+      verify_counts_section(response, {apos_key => @fixture_data.all_apo_druids.size}) # Verify the Counts
     end
 end
 

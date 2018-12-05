@@ -68,7 +68,7 @@ begin
   Last_Changed_Field = Solr_terms['last_changed']
   Fedora_Prefix      = Solr_terms['fedora_prefix']
   Druid_Prefix       = Solr_terms['druid_prefix']
-  Fedora_Types     = {:collection => Solr_terms['collection_type'], :apo => Solr_terms['apo_type'], :item => Solr_terms['item_type'], :set => Solr_terms['set_type']}.freeze
+  Fedora_Types     = {:workflow => Solr_terms['workflow_type'], :collection => Solr_terms['collection_type'], :apo => Solr_terms['apo_type'], :item => Solr_terms['item_type'], :set => Solr_terms['set_type']}.freeze
   Controller_Types = {:collection => Solr_terms['collection_field'], :apo => Solr_terms['apo_field'], :tag => Solr_terms['tag_field']}.freeze
 rescue
   puts 'WARNING: Could not configure solr terms'

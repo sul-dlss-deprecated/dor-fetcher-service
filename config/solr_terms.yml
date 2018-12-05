@@ -2,6 +2,7 @@
 defaults: &defaults
   apo_type:        "adminpolicy"
   collection_type: "collection"
+  workflow_type:   "workflow"
   item_type:       "item"
   set_type:        "set"
   druid_prefix:    "druid:"

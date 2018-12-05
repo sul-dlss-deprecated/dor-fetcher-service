@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # APO Routes
-  resources :apos, :tags, :collections, :defaults => { :format => 'json' }
+  resources :apos, :tags, :collections, :workflows, :defaults => { :format => 'json' }
 
   root :controller => 'about', :action => 'index'
   get 'about/version' => 'about#version'
