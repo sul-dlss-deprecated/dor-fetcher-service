@@ -33,4 +33,4 @@ end
 
 # Without this line RSpec forces the first task in the :default chain to be :spec, which we don't need to run twice
 task(:default).clear
-task default: %i[rubocop ci]
+task default: ['rubocop', 'dorfetcher:config_yml', 'rspec']

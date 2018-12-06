@@ -21,22 +21,14 @@ module DorFetcherService
     config.version = File.read('VERSION')
     config.app_name = 'DORFetcherService'
 
-    load_yaml_config = lambda do |yaml_file|
-      full_path = File.expand_path(File.join(File.dirname(__FILE__), yaml_file))
-      yaml_erb  = ERB.new(IO.read(full_path)).result(binding)
-      # The args here mean: no whitelisted classes, no whitelisted symbols, allow aliases (which we use and need)
-      yaml      = YAML.safe_load(yaml_erb, [], [], true)
-      return yaml[Rails.env]
-    end
-
     begin
-      config.solr_url = load_yaml_config.call('solr.yml')['url']
+      config.solr_url = config_for(:solr)['url']
     rescue StandardError
       puts 'WARNING: config/solr.yml config not found'
     end
 
     begin
-      config.solr_terms = load_yaml_config.call('solr_terms.yml')
+      config.solr_terms = config_for(:solr_terms)
     rescue StandardError
       puts 'WARNING: config/solr_terms.yml config not found'
     end
