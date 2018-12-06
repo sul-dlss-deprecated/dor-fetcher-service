@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -6,8 +8,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-VERSION = File.read('VERSION')
-
+# rubocop:disable Rails/Output
 module DorFetcherService
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -17,61 +18,68 @@ module DorFetcherService
     # Add in files in lib/, such as the fetcher module
     config.autoload_paths << Rails.root.join('lib')
 
-    config.version = VERSION # read from VERSION file at base of website
+    config.version = File.read('VERSION')
     config.app_name = 'DORFetcherService'
 
     load_yaml_config = lambda do |yaml_file|
       full_path = File.expand_path(File.join(File.dirname(__FILE__), yaml_file))
       yaml_erb  = ERB.new(IO.read(full_path)).result(binding)
-      yaml      = YAML.load(yaml_erb)
+      # The args here mean: no whitelisted classes, no whitelisted symbols, allow aliases (which we use and need)
+      yaml      = YAML.safe_load(yaml_erb, [], [], true)
       return yaml[Rails.env]
     end
 
     begin
       config.solr_url = load_yaml_config.call('solr.yml')['url']
-      # puts load_yaml_config.call('solr.yml')['url']
-    rescue
+    rescue StandardError
       puts 'WARNING: config/solr.yml config not found'
     end
 
     begin
       config.solr_terms = load_yaml_config.call('solr_terms.yml')
-      # puts load_yaml_config.call('solr_terms.yml')
-    rescue
+    rescue StandardError
       puts 'WARNING: config/solr_terms.yml config not found'
     end
 
     begin
       config.time_zone = 'UTC'
-    rescue
+    rescue StandardError
       puts 'WARNING: could not configure time zone to utc'
     end
   end
 end
 
-# Convienence constant for SOLR
+# Convenience constant for SOLR
 begin
-  Solr = RSolr.connect :url => DorFetcherService::Application.config.solr_url
-rescue
+  SOLR = RSolr.connect url: Rails.application.config.solr_url
+rescue StandardError
   puts 'WARNING: Could not configure solr url'
 end
 
 begin
-  Solr_terms = DorFetcherService::Application.config.solr_terms
+  SOLR_TERMS = Rails.application.config.solr_terms
 
   # Convience constants for Solr Fields
-  ID_Field           = Solr_terms['id_field']
-  Type_Field         = Solr_terms['fedora_type_field']
-  CatKey_Field       = Solr_terms['catkey_field']
-  Title_Field        = Solr_terms['title_field']
-  Title_Field_Alt    = Solr_terms['title_field_alt']
-  Last_Changed_Field = Solr_terms['last_changed']
-  Fedora_Prefix      = Solr_terms['fedora_prefix']
-  Druid_Prefix       = Solr_terms['druid_prefix']
-  Fedora_Types     = {:collection => Solr_terms['collection_type'], :apo => Solr_terms['apo_type'], :item => Solr_terms['item_type'], :set => Solr_terms['set_type']}.freeze
-  Controller_Types = {:collection => Solr_terms['collection_field'], :apo => Solr_terms['apo_field'], :tag => Solr_terms['tag_field']}.freeze
-rescue
+  ID_FIELD = SOLR_TERMS['id_field']
+  TYPE_FIELD = SOLR_TERMS['fedora_type_field']
+  CATKEY_FIELD = SOLR_TERMS['catkey_field']
+  TITLE_FIELD = SOLR_TERMS['title_field']
+  TITLE_FIELD_ALT = SOLR_TERMS['title_field_alt']
+  LAST_CHANGED_FIELD = SOLR_TERMS['last_changed']
+  FEDORA_PREFIX = SOLR_TERMS['fedora_prefix']
+  DRUID_PREFIX = SOLR_TERMS['druid_prefix']
+  FEDORA_TYPES = {
+    collection: SOLR_TERMS['collection_type'],
+    apo: SOLR_TERMS['apo_type'],
+    item: SOLR_TERMS['item_type'],
+    set: SOLR_TERMS['set_type']
+  }.freeze
+  CONTROLLER_TYPES = {
+    collection: SOLR_TERMS['collection_field'],
+    apo: SOLR_TERMS['apo_field'],
+    tag: SOLR_TERMS['tag_field']
+  }.freeze
+rescue StandardError
   puts 'WARNING: Could not configure solr terms'
 end
-
-# solr_fields = {:apo_field => apo_field, :collection_field => collection_field}
+# rubocop:enable Rails/Output

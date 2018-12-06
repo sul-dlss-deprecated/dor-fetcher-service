@@ -1,27 +1,29 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe('Collections Controller')  do
+describe('Collections Controller') do
   before :each do
     @fixture_data = FixtureData.new
   end
 
   it 'the index of Collections found should be all collections when not supplied a date range and all their druids should be present' do
     VCR.use_cassette('all_collections_index_call') do
-       visit collections_path
-       response = JSON.parse(page.body)
-       # Ensure All Four Collection Druids Are Present
-       result_should_contain_druids(@fixture_data.accessioned_collection_druids, response[collections_key])
-       # Ensure No Other Druids Are Present
-       result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.accessioned_collection_druids, response[collections_key])
-       expect(response[items_key]).to be_nil # Ensure No Items Were Returned
-       expect(response[apos_key]).to be_nil  # Ensure No APOS Were Returned
-       verify_counts_section(response, collections_key => @fixture_data.accessioned_collection_druids.size)
-     end
+      visit collections_path
+      response = JSON.parse(page.body)
+      # Ensure All Four Collection Druids Are Present
+      result_should_contain_druids(@fixture_data.accessioned_collection_druids, response[collections_key])
+      # Ensure No Other Druids Are Present
+      result_should_not_contain_druids(@fixture_data.accessioned_druids - @fixture_data.accessioned_collection_druids, response[collections_key])
+      expect(response[items_key]).to be_nil # Ensure No Items Were Returned
+      expect(response[apos_key]).to be_nil  # Ensure No APOS Were Returned
+      verify_counts_section(response, collections_key => @fixture_data.accessioned_collection_druids.size)
+    end
   end
 
   it 'the index of Collections should respect :last_modified and return only Stafford' do
     VCR.use_cassette('last_modified_date_collections_index_call') do
-      visit collections_path(:last_modified => last_mod_test_date_collections)
+      visit collections_path(last_modified: last_mod_test_date_collections)
       response = JSON.parse(page.body)
       # Ensure the Stafford Collection Druid is Present
       result_should_contain_druids(@fixture_data.stafford_collections_druids, response[collections_key])
@@ -35,7 +37,7 @@ describe('Collections Controller')  do
 
   it 'the index of Collections should respect :first_modified and return only Revs' do
     VCR.use_cassette('first_modified_date_collections_index_call') do
-      visit collections_path(:first_modified => first_mod_test_date_collections)
+      visit collections_path(first_modified: first_mod_test_date_collections)
       response = JSON.parse(page.body)
       # Ensure All Three Revs Collection Druids Are Present
       result_should_contain_druids(@fixture_data.revs_collections_druids, response[collections_key])
@@ -49,7 +51,7 @@ describe('Collections Controller')  do
 
   it 'find all objects even if not accessioned when you specify the correct parameter' do
     VCR.use_cassette('status=registered query') do
-      visit collections_path(:status => 'registered')
+      visit collections_path(status: 'registered')
       response = JSON.parse(page.body)
       verify_counts_section(response, collections_key => @fixture_data.all_collection_druids.size)
       expect(response['collections']).to include a_hash_including(
@@ -68,9 +70,9 @@ describe('Collections Controller')  do
       visit collection_path(@fixture_data.top_level_revs_collection_druid.split(':')[1])
       expect(with_prefix_response).to eq(JSON.parse(page.body))
       # Check For XML
-      visit collection_path(@fixture_data.top_level_revs_collection_druid, :format => 'xml')
+      visit collection_path(@fixture_data.top_level_revs_collection_druid, format: 'xml')
       with_prefix_response = page.body
-      visit collection_path(@fixture_data.top_level_revs_collection_druid.split(':')[1], :format => 'xml')
+      visit collection_path(@fixture_data.top_level_revs_collection_druid.split(':')[1], format: 'xml')
       expect(with_prefix_response).to eq(page.body)
     end
   end
@@ -102,14 +104,14 @@ describe('Collections Controller')  do
 
   it 'should respect first modified when asked for just a count' do
     VCR.use_cassette('collection_count_call_first_modified') do
-      visit collections_path(just_count_param.merge(:first_modified => first_mod_test_date_collections))
+      visit collections_path(just_count_param.merge(first_modified: first_mod_test_date_collections))
       expect(page.body.to_i).to eq(@fixture_data.revs_collections_druids.size)
     end
   end
 
   it 'should respect last modified when asked for just a count' do
     VCR.use_cassette('collection_count_call_last_modified') do
-      visit collections_path(just_count_param.merge(:last_modified => last_mod_test_date_collections))
+      visit collections_path(just_count_param.merge(last_modified: last_mod_test_date_collections))
       expect(page.body.to_i).to eq(@fixture_data.stafford_collections_druids.size)
     end
   end
@@ -128,8 +130,8 @@ describe('Collections Controller')  do
   end
 
   it 'should return a blank title if both expected title fields are not present in a solr doc' do
-    VCR.use_cassette('nt028fd5773 collection', :allow_unused_http_interactions => true) do
-      visit collection_path(:id => 'nt028fd5773')
+    VCR.use_cassette('nt028fd5773 collection', allow_unused_http_interactions: true) do
+      visit collection_path(id: 'nt028fd5773')
       response = JSON.parse(page.body)
       expect(response['items'].size).to eq(8)      # should be 8 items in this collection
       response['items'].each do |item|
@@ -145,10 +147,10 @@ describe('Collections Controller')  do
   end
 
   it 'It should only return Revs collection objects between these two dates' do
-    VCR.use_cassette('revs_objects_dates', :allow_unused_http_interactions => true) do
+    VCR.use_cassette('revs_objects_dates', allow_unused_http_interactions: true) do
       # All Revs Collection Objects Should Be Here
       # The Stafford Collection Object Should Not Be Here
-      visit collections_path(:first_modified => '2014-01-01T00:00:00Z', :last_modified => '2014-05-06T00:00:00Z')
+      visit collections_path(first_modified: '2014-01-01T00:00:00Z', last_modified: '2014-05-06T00:00:00Z')
       response = JSON.parse(page.body)
       expect(response[counts_key][collections_key]).to eq(3) # Only Have The 3 Revs Fixtures
       # Ensure The Three Revs Collection Driuds Are Present

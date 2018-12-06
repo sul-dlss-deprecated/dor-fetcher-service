@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -11,6 +13,7 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rubocop', '~> 0.60.0', require: false
 end
 
 group :development do
@@ -21,23 +24,23 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'rsolr', '>=1.0.10'
 gem 'rest-client'
+gem 'rsolr', '>=1.0.10'
 
-gem 'is_it_working'
 gem 'about_page'
+gem 'is_it_working'
 
 group :test do
-  gem 'sqlite3'
   gem 'awesome_print'
-  gem 'yard'
-  gem 'vcr'
-  gem 'webmock'
-  gem 'rspec-rails', '~> 3.1'
   gem 'capybara'
   gem 'coveralls'
+  gem 'rspec-rails', '~> 3.1'
+  gem 'sqlite3'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'yard'
 end
 
 # gems necessary for capistrano deployment
@@ -45,8 +48,8 @@ group :deployment do
   gem 'capistrano', '~> 3.0'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'dlss-capistrano'
   gem 'capistrano-rvm'
+  gem 'dlss-capistrano'
 end
 
 group :production do
@@ -54,11 +57,11 @@ group :production do
 end
 
 group :development, :test do
-  gem 'solr_wrapper', '~> 1.0'
-  gem 'pry-byebug'
   gem 'binding_of_caller'
-  gem 'meta_request'
   gem 'launchy'
+  gem 'meta_request'
+  gem 'pry-byebug'
+  gem 'solr_wrapper', '~> 1.0'
   gem 'thin'
 end
 
