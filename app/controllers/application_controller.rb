@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rsolr'
 require 'json'
 
@@ -14,16 +16,16 @@ class ApplicationController < ActionController::Base
 
   def clean_date_params
     # if user decides they only want registered objects, it is not possible to further qualify with dates, since the date solr field we look at comes from publication (i.e. after accessioning)
-    if registered_only?(params)
-      params.delete(:first_modified)
-      params.delete(:last_modified)
-    end
+    return unless registered_only?(params)
+
+    params.delete(:first_modified)
+    params.delete(:last_modified)
   end
 
   def render_result(result)
     respond_to do |format|
-      format.json {render :json => result.to_json}
-      format.xml {render :json => result.to_xml(:root => 'results')}
+      format.json { render json: result.to_json }
+      format.xml { render json: result.to_xml(root: 'results') }
     end
   end
 end

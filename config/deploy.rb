@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :application, 'dor-fetcher-service'
 set :repo_url, 'https://github.com/sul-dlss/dor-fetcher-service.git'
 
@@ -5,7 +7,7 @@ set :repo_url, 'https://github.com/sul-dlss/dor-fetcher-service.git'
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, "/opt/app/lyberadmin/dor-fetcher-service"
+set :deploy_to, '/opt/app/lyberadmin/dor-fetcher-service'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -20,10 +22,10 @@ set :deploy_to, "/opt/app/lyberadmin/dor-fetcher-service"
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/honeybadger.yml config/solr.yml config/secrets.yml}
+set :linked_files, %w[config/database.yml config/honeybadger.yml config/solr.yml config/secrets.yml]
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w[bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system]
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

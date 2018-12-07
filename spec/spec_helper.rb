@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'vcr'
 require 'coveralls'
 Coveralls.wear!('rails')
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-])
+                                                                 SimpleCov::Formatter::HTMLFormatter,
+                                                                 Coveralls::SimpleCov::Formatter
+                                                               ])
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -49,7 +51,7 @@ end
 # @see #result_should_contain_druids for params and return
 def result_should_not_contain_druids(druids, response)
   expect(response).to be_an Array
-  druids.each { |d| expect(response).not_to include(a_hash_including 'druid' => d) }
+  druids.each { |d| expect(response).not_to include(a_hash_including('druid' => d)) }
 end
 
 def all_counts_keys
@@ -90,7 +92,7 @@ def verify_counts_section(response, counts)
     nil_keys -= [key] # key was present, so we don't expect it to be nil
   end
   # If the tester didn't specify total count above, check it
-  expect(total_count).to eq(response[counts_key][total_count_key]) if counts[total_count_key = nil] # @FIXME: WTF assignment??
+  expect(total_count).to eq(response[counts_key][total_count_key]) if counts[total_count_key].nil?
 
   # Make sure the keys we expect to be nil aren't in the counts section
   nil_keys.each do |key|
@@ -99,7 +101,7 @@ def verify_counts_section(response, counts)
 end
 
 def just_count_param
-  {'rows' => 0}
+  { 'rows' => 0 }
 end
 
 def last_mod_test_date_collections
