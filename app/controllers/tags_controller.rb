@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TagsController < ApplicationController
   # API call to get a list of druids associated with a specific tag
   #
@@ -16,7 +18,7 @@ class TagsController < ApplicationController
   #   http://localhost:3000/tags/sometag?rows=0 # returns only the count of objects with this tag in json format
   #   http://localhost:3000/tags/sometag.xml?first_modified=2014-01-01T00:00:00Z&last_modified=2014-02-01T00:00:00Z# returns only the objects associated with this tag  published in January of 2014 in XML format
   def show
-    result = find_by_tag(params)
+    result = find_in_solr(params)
     render_result(result)
   end
 

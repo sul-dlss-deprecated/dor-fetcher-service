@@ -1,10 +1,10 @@
 sudo: false
 language: ruby
-script: bundle exec rake travis_spec
+cache: bundler
 rvm:
   - 2.5.3
-notifications:
-  email:
-    - pmangiafico@stanford.edu
-  on_failure: change # default: always
-cache: bundler
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up bundle install
+jdk:
+  - oraclejdk8

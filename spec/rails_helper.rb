@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'net/http'
 require 'capybara/rspec'
@@ -63,7 +65,7 @@ class FixtureData
   # APOS
   @@revs_apo = 'druid:qv648vd4392'
   @@stafford_apo = 'druid:vb546ms7107'
-  @@apo_druids = [ @@revs_apo, @@stafford_apo]
+  @@apo_druids = [@@revs_apo, @@stafford_apo]
 
   # Items
   @@not_accessioned_druid = ['druid:aa000bb0000']
@@ -75,7 +77,7 @@ class FixtureData
   @@top_level_revs_collection_druid = 'druid:nt028fd5773'
   @@revs_subcollection_druid = 'druid:wy149zp6932'
   @@stafford_collection_druids = ['druid:yg867hg1375']
-  @@revs_collection_druids = [@@top_level_revs_collection_druid, @@revs_subcollection_druid , 'druid:yt502zj0924']
+  @@revs_collection_druids = [@@top_level_revs_collection_druid, @@revs_subcollection_druid, 'druid:yt502zj0924']
   @@accessioned_collection_druids = @@stafford_collection_druids + @@revs_collection_druids
 
   @@all_collection_druids = @@accessioned_collection_druids + @@not_accessioned_druid
