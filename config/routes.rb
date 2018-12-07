@@ -5,7 +5,5 @@ Rails.application.routes.draw do
   # APO Routes
   resources :apos, :tags, :collections, defaults: { format: 'json' }
 
-  root controller: 'about', action: 'index'
-  get 'about/version' => 'about#version'
-  mount AboutPage::Engine => '/about(.:format)' # Or whever you want to access the about page
+  root 'ok_computer/ok_computer#show', check: 'default'
 end

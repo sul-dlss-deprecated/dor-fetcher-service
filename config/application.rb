@@ -18,7 +18,6 @@ module DorFetcherService
     # Add in files in lib/, such as the fetcher module
     config.autoload_paths << Rails.root.join('lib')
 
-    config.version = File.read('VERSION')
     config.app_name = 'DORFetcherService'
 
     begin
