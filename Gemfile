@@ -2,13 +2,15 @@
 
 source 'https://rubygems.org'
 
+# Bootsnap is used by Rails 5.2 apps to reduce boot time. See https://github.com/rails/rails/pull/29313
+gem 'bootsnap'
 gem 'honeybadger', '~> 2.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'okcomputer'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.2'
 gem 'rest-client'
 gem 'rsolr', '>=1.0.10'
 

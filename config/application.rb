@@ -15,9 +15,13 @@ module DorFetcherService
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Initialize configuration defaults
+    config.load_defaults 5.2
+
     # Add in files in lib/, such as the fetcher module
     config.autoload_paths << Rails.root.join('lib')
 
+    # Config values set below here are used by the application
     config.app_name = 'DORFetcherService'
 
     begin
