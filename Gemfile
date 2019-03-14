@@ -38,7 +38,7 @@ group :test do
   gem 'capybara'
   gem 'coveralls'
   gem 'rspec-rails', '~> 3.1'
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3.13'
   gem 'vcr'
   gem 'webmock'
   gem 'yard'
