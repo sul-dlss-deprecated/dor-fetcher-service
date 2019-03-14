@@ -38,7 +38,6 @@ group :test do
   gem 'capybara'
   gem 'coveralls'
   gem 'rspec-rails', '~> 3.1'
-  gem 'sqlite3'
   gem 'vcr'
   gem 'webmock'
   gem 'yard'
@@ -51,8 +50,4 @@ group :deployment do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'dlss-capistrano'
-end
-
-group :production do
-  gem 'mysql2'
 end
