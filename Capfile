@@ -24,7 +24,6 @@ require 'capistrano/deploy'
 # require 'capistrano/rails/migrations'
 
 require 'capistrano/bundler'
-require 'capistrano/rails'
 require 'dlss/capistrano'
 require 'capistrano/rvm'
 
