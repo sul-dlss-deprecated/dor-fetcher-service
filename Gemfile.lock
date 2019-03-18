@@ -72,9 +72,6 @@ GEM
       capistrano (~> 3.1)
     capistrano-one_time_key (0.1.0)
       capistrano (~> 3.0)
-    capistrano-rails (1.4.0)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
@@ -307,7 +304,6 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.0)
   capistrano-bundler
-  capistrano-rails
   capistrano-rvm
   capybara
   coveralls
