@@ -57,3 +57,6 @@ namespace :deploy do
     end
   end
 end
+
+# We don't use the asset pipeline in this application, skip precompiling
+Rake::Task['deploy:assets:precompile'].clear_actions
