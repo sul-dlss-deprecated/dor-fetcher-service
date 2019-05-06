@@ -19,7 +19,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'launchy'
-  gem 'meta_request'
   gem 'pry-byebug'
   gem 'rubocop', '~> 0.60.0', require: false
   gem 'solr_wrapper', '~> 1.0'
