@@ -4,7 +4,7 @@
 
 A web service app that queries the DOR solr service to return info needed for indexing or other purposes. Used by:
   * https://github.com/sul-dlss/pre-assembly/blob/907a6d137dfcec9d7effe917a323f3a275bbbc2e/devel/get_dor_and_sdr_versions.rb
-  * https://github.com/sul-dlss/item-release/blob/0907ed41c0de00e9fb189a9ab0759ad0794a98ac/lib/dor/item.rb
+  * https://github.com/sul-dlss/common-accessioning/blob/24827230f6aec54e49e4db7ee6daac92272e5680/lib/dor/release/item.rb#L15
 
 NOTE: This is being replaced by https://github.com/sul-dlss/base_indexer
 
